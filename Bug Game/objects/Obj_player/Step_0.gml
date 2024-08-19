@@ -38,11 +38,11 @@ if (vx == 0 && vy == 0) {
 */
 
 if (vx != 0 || vy != 0) {
-	if !collision_point(x+vx,y,obj_par_environment,true,true){
+	if !collision_point(x+vx,y,Obj_par_environment,true,true){
 	x += vx;
 	}
 	
-	if !collision_point(x,y+vy,obj_par_environment,true,true){
+	if !collision_point(x,y+vy,Obj_par_environment,true,true){
 	y += vy;
 	}
 	
@@ -66,3 +66,17 @@ if (vx != 0 || vy != 0) {
 
 Scr_terrain_checker()
 
+if place_meeting(x,y, Obj_shadow) {
+	global.hidden = true
+} else global.hidden = false
+
+if collision_point(x, y, Obj_shadow, true, true) || collision_point(x, y, Obj_bird, true, true) {
+	color = c_grey;
+} else {color = c_white}
+if  global.hidden = false{
+	if collision_point(x,y,Obj_bird,true,true) && !instance_exists(Obj_vignette) {
+		instance_create_depth(x,y,-9999, Obj_vignette)
+		bird = true
+	}
+}
+if !collision_point(x,y,Obj_bird,true,true) {bird = false}
